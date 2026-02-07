@@ -1,0 +1,37 @@
+name: Manual Calculator
+
+on:
+  workflow_dispatch:
+    inputs:
+      number1:
+        description: "Primer nmero"
+        required: true
+        default: "0"
+      number2:
+        description: "Segundo nmero"
+        required: true
+        default: "0"
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Realizar operaciones
+        run: |
+          n1=${{ github.event.inputs.number1 }}
+          n2=${{ github.event.inputs.number2 }}
+
+          echo "Nmero 1: $n1"
+          echo "Nmero 2: $n2"
+
+          echo "Suma: $((n1 + n2))"
+          echo "Resta: $((n1 - n2))"
+          echo "Multiplicacin: $((n1 * n2))"
+
+          if [ "$n2" -eq 0 ]; then
+            echo "Divisin: No se puede dividir entre 0"
+          else
+            echo "Divisin: $((n1 / n2))"
+          fi
+
