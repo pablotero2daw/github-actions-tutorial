@@ -1,0 +1,23 @@
+name: Matrix Fail Fast
+
+on: [push]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false   # Continuar aunque falle uno
+      matrix:
+        browser: [chrome, firefox, safari, edge]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test browser
+        run: |
+          echo "Testing with ${{ matrix.browser }}"
+          
+          # Simular fallo en Safari
+          if [ "${{ matrix.browser }}" = "safari" ]; then
+            exit 1
+          fi
+

@@ -1,0 +1,24 @@
+name: Weekly Motivation
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"  
+
+jobs:
+  monday-motivation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Show motivational message
+        run: |
+          echo "?? Nueva semana, nuevas oportunidades!"
+          echo "?? Mantn el foco y avanza un paso ms."
+
+      - name: Show last 5 commits
+        run: |
+          echo "ltimos 5 commits:"
+          git log -5 --pretty=format:"%h - %an: %s"
+

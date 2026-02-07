@@ -1,0 +1,20 @@
+name: Conditionals
+
+on: [push]
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runs on main
+        if: github.ref == 'refs/heads/main'
+        run: echo "This is main branch"
+
+      - name: Runs on other branches
+        if: github.ref != 'refs/heads/main'
+        run: echo "This is NOT main branch"
+
+      - name: Always runs
+        if: always()
+        run: echo "This always runs"
+
