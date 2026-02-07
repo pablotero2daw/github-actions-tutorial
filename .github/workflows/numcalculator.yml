@@ -1,0 +1,36 @@
+name: Calculator
+
+on:
+  workflow_dispatch:
+    inputs:
+      number1:
+        description: "Primer número"
+        required: true
+        default: "0"
+      number2:
+        description: "Segundo número"
+        required: true
+        default: "0"
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Realizar operaciones
+        run: |
+          n1=${{ github.event.inputs.number1 }}
+          n2=${{ github.event.inputs.number2 }}
+
+          echo "Número 1: $n1"
+          echo "Número 2: $n2"
+
+          echo "Suma: $((n1 + n2))"
+          echo "Resta: $((n1 - n2))"
+          echo "Multiplicación: $((n1 * n2))"
+
+          if [ "$n2" -eq 0 ]; then
+            echo "División: No se puede dividir entre 0"
+          else
+            echo "División: $((n1 / n2))"
+          fi
